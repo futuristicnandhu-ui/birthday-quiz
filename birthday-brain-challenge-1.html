@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>பிறந்தநாள் அறிவுச் சவால் 🎂</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#14102a;--card:#211a3d;--ink:#f1ecff;--sub:#b3a8d9;--acc:#8f6bff;--ok:#5ee0a0;--bad:#ff7a8a;--line:#3a2f66}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14102a;--card:#211a3d;--ink:#f1ecff;--sub:#b3a8d9;--acc:#8f6bff;--ok:#5ee0a0;--bad:#ff7a8a;--line:#3a2f66}}
+:root[data-theme="dark"]{--bg:#14102a;--card:#211a3d;--ink:#f1ecff;--sub:#b3a8d9;--acc:#8f6bff;--ok:#5ee0a0;--bad:#ff7a8a;--line:#3a2f66}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 50% 0%,#3a2a78 0%,var(--bg) 60%) fixed,var(--bg);min-height:100vh;color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Tamil","Segoe UI",sans-serif;line-height:1.55}
+.wrap{max-width:560px;margin:0 auto;padding:20px 16px 40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:14px}
+h1{font-size:25px;margin:8px 0;text-align:center}
+.big{font-size:56px;text-align:center}
+p{margin:8px 0}.sub{color:var(--sub);font-size:14px}
+input{width:100%;padding:13px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:16px}
+button{font:inherit;cursor:pointer}
+.btn{width:100%;margin-top:14px;padding:14px;border:0;border-radius:12px;background:var(--acc);color:#fff;font-weight:700;font-size:16px}
+.ghost{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
+.opt{display:block;width:100%;text-align:left;margin-top:10px;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-size:15px}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 18%,var(--card))}
+.bar{height:8px;background:var(--line);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .3s}
+.top{display:flex;justify-content:space-between;font-size:13px;color:var(--sub);margin:12px 0 6px}
+.tag{display:inline-block;font-size:12px;background:var(--line);padding:3px 10px;border-radius:20px;color:var(--sub)}
+.exp{margin-top:14px;padding:12px;border-radius:12px;background:var(--bg);font-size:14px}
+.sur{text-align:center;border:2px dashed var(--acc)}
+.hide{display:none}
+.wrap{position:relative;z-index:1}
+#wish,#sb{white-space:pre-line}
+.card{box-shadow:0 0 24px rgba(143,107,255,.25)}
+.gh{position:fixed;bottom:-60px;opacity:.35;animation:flt 14s linear infinite;pointer-events:none;z-index:0;filter:drop-shadow(0 0 8px #b9a4ff)}
+@keyframes flt{50%{transform:translate(28px,-55vh)}to{transform:translate(-20px,-120vh)}}
+.cf{position:fixed;top:-30px;font-size:24px;animation:fall 2.6s linear forwards;pointer-events:none;z-index:9}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+</style>
+</head>
+<body>
+<button id="mu" onclick="mute()" style="position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);right:10px;z-index:5;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:20px;padding:6px 12px;font-size:18px">🔊</button>
+<div class="wrap">
+
+<div id="start" class="card">
+  <div class="big">👻🎂</div>
+  <h1>பேய் மாளிகையில் பிறந்தநாள் சவால்</h1>
+  <p class="sub" style="text-align:center">50 கேள்விகள் • இடையிடையே பயமுறுத்தும் ஆச்சரியங்கள் 👻🎁</p>
+  <p style="text-align:center">டோரா, உங்கள் ஆறு நண்பர்கள் ஒரு பேய் மாளிகையில் சிக்கிக்கொண்டனர். அவர்களைக் காப்பாற்ற உங்களால் மட்டுமே முடியும்... தயாரா? 🕯️</p>
+  
+  <button class="btn" onclick="begin()">பயணத்தைத் தொடங்கு 🕯️</button>
+</div>
+
+<div id="quiz" class="hide">
+  <div class="top"><span id="cnt"></span><span id="sc"></span></div>
+  <div class="bar"><i id="pb"></i></div>
+  <div class="card">
+    <span class="tag" id="cat"></span>
+    <p id="q" style="font-size:18px;font-weight:600;margin-top:12px"></p>
+    <div id="opts"></div>
+    <button id="ll" class="btn ghost hide" onclick="fifty()"></button>
+    <div id="exp" class="exp hide"></div>
+    <button id="next" class="btn hide" onclick="next()">அடுத்தது ➜</button>
+  </div>
+</div>
+
+<div id="sur" class="card sur hide">
+  <div class="big" id="se"></div>
+  <h1 id="st"></h1>
+  <p id="sb"></p>
+  <button class="btn" onclick="resume()">தொடரலாம் ➜</button>
+</div>
+
+<div id="end" class="card hide">
+  <div class="big" id="emoji"></div>
+  <h1 id="title"></h1>
+  <p id="score" style="text-align:center;font-size:20px;font-weight:700"></p>
+  <p id="wish"></p>
+  <button class="btn" onclick="location.reload()">மீண்டும் முயல்க 🔁</button>
+</div>
+
+</div>
+<script>
+// [category, question, correct, wrong1, wrong2, wrong3, explanation]
+const D=[
+["வரலாறு","Who built the Brihadeeswarar Temple at Thanjavur?","Raja Raja Chola I","Rajendra Chola I","Narasimhavarman I","Kulothunga Chola","Completed around 1010 CE."],
+["வரலாறு","The Grand Anicut (Kallanai) was built by?","Karikala Chola","Raja Raja Chola","Rajaraja Pandya","Mahendravarman I","One of the world’s oldest functioning dams."],
+["வரலாறு","The Battle of Plassey was fought in?","1757","1764","1857","1739"],
+["வரலாறு","The Doctrine of Lapse was introduced by?","Lord Dalhousie","Lord Wellesley","Lord Curzon","Lord Cornwallis"],
+["வரலாறு","The Vellore Mutiny took place in?","1806","1857","1799","1784"],
+["வரலாறு","Who led the Vedaranyam Salt March of 1930?","C. Rajagopalachari","K. Kamaraj","V.O. Chidambaram Pillai","Subramania Bharati"],
+["வரலாறு","The Self-Respect Movement was founded in 1925 by?","E.V. Ramasamy (Periyar)","C.N. Annadurai","T.M. Nair","Muthulakshmi Reddi"],
+["வரலாறு","The Justice Party (South Indian Liberal Federation) was founded in?","1916","1920","1925","1905"],
+["வரலாறு","Madras State was renamed Tamil Nadu in?","1969","1956","1950","1971"],
+["வரலாறு","Who is known for expanding the Mid-Day Meal scheme in Madras State schools?","K. Kamaraj","M. Karunanidhi","C. Rajagopalachari","Bhaktavatsalam"],
+["வரலாறு","The emblem of the Pandya dynasty was?","Fish","Tiger","Bow","Lion"],
+["வரலாறு","Mamallapuram was declared a UNESCO World Heritage Site in?","1984","1972","1992","2004"],
+["தமிழ் இலக்கியம்","Who wrote Manimekalai?","Sithalai Sathanar","Ilango Adigal","Kambar","Thiruvalluvar"],
+["தமிழ் இலக்கியம்","The oldest available Tamil grammar work is?","Tolkappiyam","Nannool","Yapperungalam","Veerasoliyam"],
+["தமிழ் இலக்கியம்","Kamban’s epic Ramavataram is also known as?","Kambaramayanam","Periya Puranam","Kalingathuparani","Nalayira Divya Prabandham"],
+["தமிழ் இலக்கியம்","How many works make up the Pathinenmelkanakku (Eighteen Minor Works)?","18","10","8","12"],
+["தமிழ் இலக்கியம்","How many couplets are in the Aram section of the Thirukkural?","380","250","700","1330","38 chapters × 10 couplets."],
+["அரசியலமைப்பு","Right to Education is guaranteed under which Article?","Article 21A","Article 19","Article 32","Article 44"],
+["அரசியலமைப்பு","Dr. Ambedkar called which Article the ‘heart and soul’ of the Constitution?","Article 32","Article 21","Article 14","Article 368"],
+["அரசியலமைப்பு","The idea of Fundamental Rights was borrowed from the Constitution of?","USA","UK","Ireland","Canada"],
+["அரசியலமைப்பு","How many Schedules does the Indian Constitution currently have?","12","8","10","14"],
+["அரசியலமைப்பு","Who chaired the Drafting Committee of the Constituent Assembly?","B.R. Ambedkar","Rajendra Prasad","J.L. Nehru","Sardar Patel"],
+["அரசியலமைப்பு","The minimum age to become President of India is?","35","30","25","40"],
+["அரசியலமைப்பு","The maximum strength of the Rajya Sabha is?","250","245","300","238"],
+["அரசியலமைப்பு","National Emergency is declared under which Article?","Article 352","Article 356","Article 360","Article 370"],
+["அரசியலமைப்பு","The 73rd Amendment relates to?","Panchayati Raj","Municipalities","Anti-defection","GST"],
+["அரசியலமைப்பு","Money Bill is defined in which Article?","Article 110","Article 108","Article 123","Article 112"],
+["அரசியலமைப்பு","A joint sitting of Parliament is provided under?","Article 108","Article 85","Article 110","Article 117"],
+["புவியியல்","The highest peak in Tamil Nadu is?","Doddabetta","Anamudi","Mahendragiri","Velliangiri","Doddabetta is 2,637 m, in the Nilgiris."],
+["புவியியல்","Which is the only perennial river that originates and ends within Tamil Nadu?","Thamirabarani","Vaigai","Palar","Bhavani"],
+["புவியியல்","The longest river of Peninsular India is?","Godavari","Krishna","Cauvery","Mahanadi"],
+["புவியியல்","The Tropic of Cancer passes through how many Indian states?","8","6","10","7"],
+["புவியியல்","India’s largest inland salt lake, Sambhar, is in?","Rajasthan","Gujarat","Odisha","Haryana"],
+["புவியியல்","Which soil is considered best for cotton?","Black soil","Red soil","Alluvial soil","Laterite soil"],
+["புவியியல்","The Palghat Gap connects Tamil Nadu with?","Kerala","Karnataka","Andhra Pradesh","Goa"],
+["புவியியல்","Hogenakkal Falls is on which river?","Cauvery","Vaigai","Pennaiyar","Thamirabarani"],
+["புவியியல்","Rameswaram island is connected to the mainland by?","Pamban Bridge","Chennai Bridge","Marina Bridge","Kanyakumari Bridge"],
+["அறிவியல்","Deficiency of which vitamin causes scurvy?","Vitamin C","Vitamin D","Vitamin A","Vitamin B12"],
+["அறிவியல்","The most abundant gas in Earth’s atmosphere is?","Nitrogen","Oxygen","Carbon dioxide","Argon"],
+["அறிவியல்","The ‘powerhouse of the cell’ is the?","Mitochondria","Ribosome","Nucleus","Golgi body"],
+["அறிவியல்","Who discovered the electron?","J.J. Thomson","Rutherford","Chadwick","Bohr"],
+["அறிவியல்","C.V. Raman received the Nobel Prize in Physics in?","1930","1947","1921","1950"],
+["அறிவியல்","The pH of pure water at 25°C is?","7","0","14","5"],
+["கணிதம்","Find the next number: 2, 6, 12, 20, 30, ?","42","40","44","36","Differences are 4, 6, 8, 10, 12."],
+["கணிதம்","What is 15% of 240?","36","30","32","40"],
+["கணிதம்","A 60 km/h train crosses a pole in 12 seconds. Its length is?","200 m","180 m","240 m","120 m","60 km/h = 50/3 m/s; × 12 = 200 m."],
+["கணிதம்","The average of the first 10 natural numbers is?","5.5","5","6","10"],
+["கணிதம்","If the ratio 3:5 is equal to x:40, then x is?","24","20","25","28"],
+["கணிதம்","The simple interest on ₹2,000 at 5% per annum for 3 years is?","₹300","₹250","₹350","₹400"],
+["கணிதம்","The LCM of 12 and 18 is?","36","6","72","54"]
+];
+const ST=[0,9,17,25,33,41];
+const CH=[
+{f:"அகல்யா",i:"முதல் தளம்: பேய் சிரிக்கும் நடைபாதை. சுவரிலிருந்து ஒரு நிழல் நீண்டு அகல்யாவை இருளுக்குள் இழுத்துச் சென்றது! 'டோரா... உதவி!' என்று குரல் மெல்ல மறைகிறது. அவரைக் காப்பாற்ற இந்தக் கேள்விகளைக் கடக்க வேண்டும்."},
+{f:"கனிப்ரோ",i:"தரை நடுங்குகிறது. பழைய நூலகத்தில் புத்தகங்கள் தாமாகப் பறக்கின்றன. மேல் அறையிலிருந்து கனிப்ரோவின் அலறல் கேட்கிறது! சரியாகப் பதில் சொன்னால் மட்டுமே படிக்கட்டு திறக்கும்."},
+{f:"கார்த்தி",i:"குளிர்ந்த காற்று உங்கள் காதில் ஏதோ கிசுகிசுக்கிறது. கண்ணாடி அறையில் கார்த்தி சிக்கியுள்ளார்; ஆனால் எந்தக் கண்ணாடியில் இருப்பது உண்மையான கார்த்தி என்று தெரியவில்லை... ஒரு தவறு கூட அபாயம்!"},
+{f:"வெக்டர்",i:"மாளிகையின் மணி நள்ளிரவைத் தட்டுகிறது. நிலவறையில் வெக்டரைச் சங்கிலிகள் இறுக்குகின்றன. கதவுக்குப் பின்னால் ஏதோ ஒன்று கனமாக மூச்சு விடும் சத்தம்..."},
+{f:"ஹினாட்டா",i:"மாடியில் ஒரு பழைய தொட்டில் தானாக ஆடுகிறது. ஒரு குட்டிப் பேய் சிரித்துக்கொண்டே ஹினாட்டாவை இருண்ட அறைக்குள் இழுத்துச் செல்கிறது! நேரம் குறைவு!"},
+{f:"சாம்ப்",i:"கடைசி அறை. கூரையில் ஆயிரம் வவ்வால்கள் சிவந்த கண்களோடு உங்களையே பார்க்கின்றன. சாம்ப் இங்கேதான் இருக்கிறார். இதுவே மாளிகையின் கடைசி, மிகக் கடினமான புதிர்!"}
+];
+const PRO={e:"🕯️",t:"இரவு 11:58",b:"டோராவின் பிறந்தநாளுக்கு இன்னும் சில நிமிடங்களே. ஆறு நண்பர்கள் ஒரு ஆச்சரியம் தருவதாகச் சொல்லி உங்களை ஒரு பழைய மாளிகைக்கு அழைத்து வந்தனர். திடீரென்று கதவு அடித்து மூடியது. சிரிப்புச் சத்தம் அலறலாக மாறியது... அகல்யா, கனிப்ரோ, கார்த்தி, வெக்டர், ஹினாட்டா, சாம்ப் ஒவ்வொருவராக இருளில் மறைந்தனர்.\n\nஒரு கரகரப்பான குரல் ஒலித்தது: 'சரியான விடை சொல்பவருக்கே நண்பர்கள் திரும்புவர்...'\n\nடோரா, இனி எல்லாம் உங்கள் கையில்!"};
+const FIN={e:"🎂",t:"கதவு திறந்தது!",b:"மாளிகையின் கனமான கதவு மெல்லத் திறந்தது. வெளியே ஆறு நண்பர்களும் மெழுகுவர்த்திகளோடு நின்றனர்: 'Happy Birthday டோரா!' 🎉\n\nபேய்கள் கூட ஓரமாக நின்று கைதட்டின. 'பல வருடங்களுக்குப் பிறகு ஒரு உண்மையான கொண்டாட்டம்' என்று அவை மகிழ்ந்தன.",k:"conf"};
+const J=[
+{i:"பேய் ஒரு பாடலை இனிமையாகப் பாடிப் பார்த்தது: 'குரல் இனிமையா இருந்தால் அகல்யா காதலிச்சுவார்' என்று அதுவே கணக்குப் போட்டிருக்கலாம்! ஆனால் அகல்யா: 'குரல் நல்லாத்தான் இருக்கு, ஆனா இன்னிக்கு இல்ல!' 😄",r:"அகல்யா: 'அந்தப் பேயோட குரல் நல்லாத்தான் இருந்துச்சு... ஆனா இன்னிக்கு இல்ல!' 😏"},
+{i:"பயமுறுத்தும் இருட்டிலும் கனிப்ரோ நாட்டு நடப்பைப் பற்றிப் பேசிக்கொண்டே இருக்கிறார்: பேயிடமே ஒரு விவாதம்! பேய் தலையைப் பிடித்துக்கொண்டது 😅",r:"கனிப்ரோ மீட்கப்பட்டதும் முதல் வார்த்தை: 'இந்த மாளிகை பற்றி நாட்டு நடப்பு என்னன்னா...' பேய்கள் ஓடிவிட்டன! 😂"},
+{i:"பேய் கேட்டது: 'யார் நீ?' கார்த்தி: 'ம்ம்...' 'எங்கிருந்து வந்தாய்?' 'ம்ம்...' பேய் குழம்பி, ஒரு நிமிடம் அதுவே பயந்துவிட்டது 😂",r:"கார்த்தி: 'ம்ம்...' என்று மட்டும் சொன்னார். அது 'நன்றி' என்று நமக்குப் புரிந்தது 😄"},
+{i:"சங்கிலிக்குள் சிக்கியிருந்தும் வெக்டர் சுவரில் பேயின் படத்தை வரைந்துக்கொண்டிருந்தார்: 'முகம் கொஞ்சம் சரியா வரலை, ஒரு நிமிஷம் அப்படியே நில்லுங்க!' 🎨",r:"வெக்டர் தப்பித்ததும் பேய் கேட்டது: 'எனக்கும் ஒன்னு போட்டுக் கொடுப்பா!' 🖌️"},
+{i:"குட்டிப் பேய் அழுதது. ஹினாட்டா மிகவும் பக்குவமாக: 'பயப்படாதே, உன் பிரச்சினை என்னன்னு பேசலாம்' என்று பேயிடம் கவுன்சிலிங் கொடுத்தார் 🧘",r:"ஹினாட்டா: 'நடந்ததை நினைத்து வருந்தாதீங்க, அடுத்து என்ன செய்யலாம்னு பார்க்கலாம்.' குட்டிப் பேய் தலையாட்டிக் கேட்டது 😌"},
+{i:"வவ்வால்கள் சூழ்ந்தும் சாம்ப் அழகான தூய தமிழில் முழங்கினார்: 'வவ்வால்களே, அமைதி காப்பீர்!' வவ்வால்களுக்கே ஒன்றும் புரியவில்லை 😄 டோராவைக் கண்டதும் செல்லமாகத் திட்டத் தயாராக இருக்கிறார்: 'எங்கே போனாய் நீ, என்னிடம் சொல்லாமல்?!' 😤",r:"சாம்ப் மீட்கப்பட்டதும் முதல் வார்த்தை: 'எங்கே போனாய் நீ, என்னிடம் சொல்லாமல்?' பேய்களே பயந்துவிட்டன, ஏனெனில் அந்தத் திட்டு அவ்வளவு தூய தமிழில்! 😂"}
+];
+const intro=c=>({e:"👻",t:"அத்தியாயம் "+(c+1)+" • "+CH[c].f+" ஆபத்தில்!",b:CH[c].i+"\n\n"+J[c].i});
+const rescue=c=>{const n=(c<5?ST[c+1]:50)-ST[c],g=cc*2>=n,f=CH[c].f;cc=0;return g?{e:"✅",t:f+" மீட்கப்பட்டார்!",b:f+" பத்திரமாக விடுவிக்கப்பட்டார்! உங்கள் அறிவைக் கண்டு பேய்களே வழிவிட்டன.\n\n"+J[c].r,k:"conf"}:{e:"😰",t:f+" மயிரிழையில் தப்பினார்!",b:f+" கடைசி நொடியில் தப்பினார், ஆனால் பயத்தில் நடுங்குகிறார். அடுத்து இன்னும் கவனமாக!\n\n"+J[c].r}};
+const SUR=[
+{e:"🎁",t:"ஒரு சிறிய வாழ்த்து",b:"உங்கள் உழைப்பும் முயற்சியும் ஒருநாள் உங்களை மிக உயரத்தில் நிறுத்தும். இந்த நாள் மகிழ்ச்சியால் நிறையட்டும்!"},
+{e:"⭐",t:"போனஸ் புள்ளி!",b:"உங்களுக்காக ஒரு இலவச மதிப்பெண் சேர்க்கப்பட்டுள்ளது.",k:"bonus"},
+{e:"🛟",t:"50:50 உதவி கிடைத்துள்ளது!",b:"ஒரு கேள்வியில் இரண்டு தவறான விடைகளை நீக்கலாம். சரியான நேரத்தில் பயன்படுத்துங்கள்.",k:"life"},
+{e:"💡",t:"உங்களுக்காக ஒரு தகவல்",b:"தமிழ் உலகின் மிகப் பழமையான வாழும் மொழிகளில் ஒன்று. அதைப் படிப்பவர்கள் ஒரு பெரிய பாரம்பரியத்தின் வாரிசுகள்."},
+{e:"🎉",t:"கொண்டாட்ட நேரம்!",b:"இன்று உங்கள் நாள். இந்தத் தருணத்தை ரசியுங்கள்!",k:"conf"},
+{e:"🌟",t:"நம்பிக்கை வரிகள்",b:"கனவு காண்பது தொடக்கம்; தொடர்ந்து முயல்வதே வெற்றி. நீங்கள் அதைச் செய்வீர்கள் என்பதில் ஐயமில்லை."},
+{e:"🍰",t:"இனிப்புக்கு இடைவேளை",b:"சிறிது மூச்சு விட்டுக்கொள்ளுங்கள். கேக் வெட்டும் முன் இன்னும் கேள்விகள் மீதமுள்ளன!",k:"conf"}
+];
+let Q,i,s,nm,ll,slots,cur,cc=0,queue=[],fin=false;
+for(let n=0;n<9;n++){const g=document.createElement("span");g.className="gh";g.textContent=n%4===3?"🦇":"👻";g.style.left=(n*11+Math.random()*6)+"vw";g.style.fontSize=(22+Math.random()*22)+"px";g.style.animationDelay=(-n*1.6)+"s";g.style.animationDuration=(11+Math.random()*8)+"s";document.body.appendChild(g)}
+const $=id=>document.getElementById(id);
+const shuf=a=>{a=a.slice();for(let j=a.length-1;j>0;j--){const k=Math.random()*(j+1)|0;[a[j],a[k]]=[a[k],a[j]]}return a};
+let AC,mut=false,drone;
+function au(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==="suspended")AC.resume();return AC}
+function tone(f,d,ty,v,at,sl){const a=au();if(!a||mut)return;const o=a.createOscillator(),g=a.createGain();o.type=ty||"sine";const t=a.currentTime+(at||0);o.frequency.setValueAtTime(f,t);if(sl)o.frequency.exponentialRampToValueAtTime(sl,t+d);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(v||.15,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d+.05)}
+const sfx={ok(){tone(660,.15,"sine",.2);tone(880,.25,"sine",.2,.12)},bad(){tone(180,.35,"sawtooth",.12,0,90)},scare(){tone(900,.9,"sawtooth",.1,0,120);tone(120,1.2,"square",.08,.1,60)},win(){[523,659,784,1047].forEach((f,k)=>tone(f,.3,"triangle",.2,k*.12))},bell(){tone(440,1.5,"sine",.2);tone(660,1.2,"sine",.1)},fan(){[523,523,587,523,698,659].forEach((f,k)=>tone(f,.35,"triangle",.22,k*.3))}};
+function say(t){if(mut||!window.speechSynthesis)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="ta-IN";u.pitch=1.5;u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
+function mute(){mut=!mut;$("mu").textContent=mut?"🔇":"🔊";if(mut&&window.speechSynthesis)speechSynthesis.cancel();if(drone)drone.g.gain.value=mut?0:.03}
+let mood="spooky",bt,stp=0;
+const SC={spooky:[220,233.1,277.2,329.6,349.2,415.3,440],scare:[110,116.5,138.6,164.8,174.6,207.7,220],happy:[262,294,330,349,392,440,494,523]};
+const PAT=[0,2,4,2,5,4,2,0,1,3,5,3,6,5,3,1];
+function startMusic(){if(bt)return;const lp=()=>{bt=setTimeout(()=>{if(!mut&&!document.hidden){const sc=SC[mood],n=PAT[stp%PAT.length];stp++;tone(sc[n%sc.length]*2,.9,"triangle",mood==="happy"?.1:.07);if(stp%8===0)tone(sc[0]/2,2.4,"sine",mood==="happy"?.05:.1)}lp()},mood==="happy"?380:mood==="scare"?330:640)};lp()}
+function startDrone(){const a=au();if(!a||drone)return;const o=a.createOscillator(),g=a.createGain();o.type="sine";o.frequency.value=55;g.gain.value=.03;o.connect(g);g.connect(a.destination);o.start();drone={o,g}}
+function begin(){au();startDrone();startMusic();
+  nm="டோரா";
+  Q=D.map(d=>({c:d[0],q:d[1],a:d[2],o:d.slice(2,6),e:d[6]||""}));
+  i=0;s=0;ll=0;
+  const pos=shuf([...Array(44).keys()].map(n=>n+3)).slice(0,SUR.length).sort((a,b)=>a-b);
+  const su=shuf(SUR);slots={};pos.forEach((p,n)=>slots[p]=su[n]);
+  $("start").classList.add("hide");queue=[PRO,intro(0)];play();
+}
+function show(){
+  const x=Q[i];cur=x;$("cnt").textContent="கேள்வி "+(i+1)+" / "+Q.length;$("sc").textContent="⭐ "+s;
+  $("pb").style.width=(i/Q.length*100)+"%";const ch=ST.filter(n=>n<=i).length-1;$("cat").textContent=x.c+" • 🔦 "+CH[ch].f+" காப்பாற்ற";$("q").textContent=x.q;
+  $("exp").classList.add("hide");$("next").classList.add("hide");
+  $("opts").innerHTML="";
+  shuf(x.o).forEach(t=>{const b=document.createElement("button");b.className="opt";b.textContent=t;b.onclick=()=>pick(b,t);$("opts").appendChild(b)});
+  llBtn();
+}
+function llBtn(){const b=$("ll");b.textContent="🛟 50:50 ("+ll+")";b.classList.toggle("hide",ll<1||$("opts").children[0].disabled)}
+function fifty(){
+  let w=[...$("opts").children].filter(b=>b.textContent!==cur.a&&!b.disabled);
+  shuf(w).slice(0,2).forEach(b=>{b.disabled=true;b.style.opacity=.3});ll--;llBtn();
+}
+function pick(b,t){
+  const bs=[...$("opts").children];
+  bs.forEach(o=>{o.disabled=true;if(o.textContent===cur.a)o.classList.add("ok")});
+  if(t===cur.a){s++;cc++;sfx.ok()}else{b.classList.add("bad");sfx.bad()}
+  $("sc").textContent="⭐ "+s;$("ll").classList.add("hide");
+  if(cur.e){$("exp").textContent="💡 "+cur.e;$("exp").classList.remove("hide")}
+  $("next").textContent=i===Q.length-1?"முடிவைப் பார்க்க 🎁":"அடுத்தது ➜";$("next").classList.remove("hide");
+}
+function next(){
+  if(i===Q.length-1){fin=true;queue=[rescue(5),FIN];play();return}
+  const u=slots[i];i++;queue=u?[u]:[];if(ST.includes(i)){queue.push(rescue(ST.indexOf(i)-1),intro(ST.indexOf(i)))}play();return;
+  if(u){surprise(u)}else show();
+}
+function surprise(u){mood=u.e==="👻"?"scare":u.e==="🎂"?"happy":"spooky";if(u.e==="🎂"&&drone)drone.g.gain.value=0;if(u.e==="👻"){sfx.scare();say("டோரா! காப்பாற்றுங்கள்!")}else if(u.e.startsWith("🕯"))sfx.bell();else if(u.e==="✅")sfx.win();else if(u.e==="😰")sfx.bad();else if(u.e==="🎂"){sfx.fan();say("இனிய பிறந்தநாள் வாழ்த்துகள் டோரா!")}else sfx.win();
+  if(u.k==="bonus")s++;if(u.k==="life")ll++;
+  $("quiz").classList.add("hide");$("sur").classList.remove("hide");
+  $("se").textContent=u.e;$("st").textContent=u.t;$("sb").textContent=u.b;
+  if(u.k==="conf")confetti();
+}
+function resume(){play()}
+function play(){if(queue.length){surprise(queue.shift())}else if(fin){finish()}else{$("sur").classList.add("hide");$("quiz").classList.remove("hide");show()}}
+function confetti(){
+  for(let n=0;n<28;n++){const c=document.createElement("span");c.className="cf";c.textContent=["👻","🎉","🦇","✨"][n%4];
+  c.style.left=Math.random()*95+"vw";c.style.animationDelay=Math.random()*.8+"s";document.body.appendChild(c);setTimeout(()=>c.remove(),3600)}
+}
+function finish(){$("sur").classList.add("hide");
+  $("quiz").classList.add("hide");$("end").classList.remove("hide");
+  let e,t;
+  if(s>=42){e="👑";t="அபாரம்! மிகச் சிறந்த அறிவு!"}else if(s>=32){e="🏆";t="மிகச் சிறப்பு! வாழ்த்துகள்!"}else if(s>=22){e="💪";t="நல்ல முயற்சி! தொடர்ந்து முன்னேறுங்கள்!"}else{e="📚";t="நல்ல தொடக்கம்! உங்களால் இன்னும் முடியும்!"}
+  $("emoji").textContent=e;$("title").textContent=t;$("score").textContent=s+" / "+Q.length;
+  $("wish").textContent="இனிய பிறந்தநாள் நல்வாழ்த்துகள், "+nm+"! 🎂 நீங்கள் இன்று ஆறு நண்பர்களையும் காப்பாற்றிவிட்டீர்கள்! உங்கள் கனவுகள் அனைத்தும் நிறைவேறி, வாழ்வில் வெற்றியும் மகிழ்ச்சியும் பெருகட்டும்.\n\n— அகல்யா, கனிப்ரோ, கார்த்தி, வெக்டர், ஹினாட்டா, சாம்ப் ❤️";
+  confetti();
+}
+</script>
+</body>
+</html>
